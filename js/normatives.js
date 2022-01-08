@@ -1,9 +1,9 @@
 export const activityCoefficient = {
-  minimal: 1.2,
+  min: 1.2,
   low: 1.375,
   medium: 1.55,
   high: 1.725,
-  very_high: 1.9
+  max: 1.9
 };
 
 export const maintainNormative = {
