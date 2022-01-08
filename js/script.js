@@ -1,3 +1,6 @@
+// Импорты
+import activityCoeff from './normatives.js';
+
 // HTML-элементы формы:
 const form = document.querySelector('.form');
 const submitBtn = form.querySelector('.form__submit-button');
