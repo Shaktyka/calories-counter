@@ -32,6 +32,9 @@ let activityValue = null;
 const resetForm = () => {
   form.reset;
   resultBlock.classList.add('counter__result--hidden');
+  caloriesNormElement.textContent = '';
+  caloriesLossElement.textContent = '';
+  caloriesGainElement.textContent = '';
 };
 
 // Обработчик ввода в числовые поля:
@@ -81,9 +84,9 @@ const calculateCaloriesNorm = (data) => {
 // Отрисовывает результат:
 const showResult = (normCalories = 0, lossCalories = 0, gainCalories = 0) => {
   // Добавляет пробел между тысячами и отрисовывает данные:
-  caloriesNormElement.textContent = normCalories.toLocaleString('ru-RU');
-  caloriesLossElement.textContent = lossCalories.toLocaleString('ru-RU');
-  caloriesGainElement.textContent = gainCalories.toLocaleString('ru-RU');
+  caloriesNormElement.textContent = Math.round(normCalories).toLocaleString('ru-RU');
+  caloriesLossElement.textContent = Math.round(lossCalories).toLocaleString('ru-RU');
+  caloriesGainElement.textContent = Math.round(gainCalories).toLocaleString('ru-RU');
   
   // Открывает блок:
   if (resultBlock.classList.contains('counter__result--hidden')) {
@@ -97,9 +100,9 @@ const formSubmitHandler = (evt) => {
   const formData = new FormData(form);
 
   // Рассчитывает нормы калорий:
-  const caloriesNorm = Math.round(calculateCaloriesNorm(formData));
-  const caloriesLossValue = Math.round(caloriesNorm - caloriesNorm * weightLossPercentage);
-  const caloriesGainValue = Math.round(caloriesNorm + caloriesNorm * weightGainPercentage);
+  const caloriesNorm = calculateCaloriesNorm(formData);
+  const caloriesLossValue = caloriesNorm - caloriesNorm * weightLossPercentage;
+  const caloriesGainValue = caloriesNorm + caloriesNorm * weightGainPercentage;
 
   // Отрисовывает блок результата:
   showResult(caloriesNorm, caloriesLossValue, caloriesGainValue);
